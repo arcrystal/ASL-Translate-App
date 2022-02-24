@@ -62,6 +62,8 @@ class CameraViewController: UIViewController {
             print("User has denied the permission.")
         case .limited:
             print("hi")
+        @unknown default:
+            <#fatalError()#>
         }
     }
     
