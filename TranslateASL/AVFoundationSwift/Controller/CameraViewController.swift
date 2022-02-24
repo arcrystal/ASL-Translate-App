@@ -225,48 +225,48 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     
     
 }
-@available(iOS 14.0, *)
-var handPoseRequest: VNDetectHumanHandPoseRequest!
-@available(iOS 14.0, *)
-var handPoseObservation: VNRecognizedPointsObservation!
-
-extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
-    public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection){
-        if #available(iOS 14.0, *) {
-            let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer, orientation: .up, options: [:])
-            do {
-                try handler.perform([handPoseRequest])
-                guard let observation = handPoseRequest.results?.first as?
-                        VNRecognizedPointsObservation else {
-                            return
-                        }
-                let allPoints = try handPoseObservation.recognizedPoints(forGroupKey: VNRecognizedPointGroupKey.all)
-//                let thumbPoints = try observation.recognizedPoints(forGroupKey:  .handLandmarkRegionKeyThumb)
-//                let indexFingerPoints = try observation.recognizedPoints(forGroupKey: .handLandmarkRegionKeyIndexFinger)
-//                guard let thumbTipPoint = thumbPoints[.handLandmarkKeyThumbTIP], let indexTipPoint = indexFingerPoints[.handLandmarkKeyIndexTIP] else {
-//                    return
-//                }
-//                guard thumbTipPoint.confidence > .3 && indexTip.confidence > .3 else{
-//                    return
-//                }
-//                thumbTip = CGPoint(x: thumbTipPoint.location.x, y: 1-thumbTipPoint.location.y)
+//@available(iOS 14.0, *)
+//var handPoseRequest: VNDetectHumanHandPoseRequest!
+//@available(iOS 14.0, *)
+//var handPoseObservation: VNRecognizedPointsObservation!
+//
+//extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+//    public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection){
+//        if #available(iOS 14.0, *) {
+//            let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer, orientation: .up, options: [:])
+//            do {
+//                try handler.perform([handPoseRequest])
+//                guard let observation = handPoseRequest.results?.first as?
+//                        VNRecognizedPointsObservation else {
+//                            return
+//                        }
+//                let allPoints = try handPoseObservation.recognizedPoints(forGroupKey: VNRecognizedPointGroupKey.all)
+////                let thumbPoints = try observation.recognizedPoints(forGroupKey:  .handLandmarkRegionKeyThumb)
+////                let indexFingerPoints = try observation.recognizedPoints(forGroupKey: .handLandmarkRegionKeyIndexFinger)
+////                guard let thumbTipPoint = thumbPoints[.handLandmarkKeyThumbTIP], let indexTipPoint = indexFingerPoints[.handLandmarkKeyIndexTIP] else {
+////                    return
+////                }
+////                guard thumbTipPoint.confidence > .3 && indexTip.confidence > .3 else{
+////                    return
+////                }
+////                thumbTip = CGPoint(x: thumbTipPoint.location.x, y: 1-thumbTipPoint.location.y)
+////            }
 //            }
-            }
-            catch{
-                __?.stopRunning()
-                let error = AppError.visionError(error: error)
-                DispatchQueue.main.async{
-                    error.displayInViewController(self)
-                }
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-            
-        
-
-
-        }
-    }
-    
+//            catch{
+//                __?.stopRunning()
+//                let error = AppError.visionError(error: error)
+//                DispatchQueue.main.async{
+//                    error.displayInViewController(self)
+//                }
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//
+//
+//
+//
+//        }
+//    }
+//
 
